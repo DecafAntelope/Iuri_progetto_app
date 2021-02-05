@@ -29,6 +29,7 @@ import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -55,6 +56,7 @@ public class ElencoProgActivity extends AppCompatActivity  implements AdapterPro
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_elenco_prog);
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         listaPres = new ArrayList<String>();
         user = getIntent().getStringExtra("username");
         cerca = (ImageButton) findViewById(R.id.imgBtnCerca);
@@ -94,6 +96,10 @@ public class ElencoProgActivity extends AppCompatActivity  implements AdapterPro
                             }
                         });
 
+                    }
+                    else
+                    {
+                        Toast.makeText(ElencoProgActivity.this, "Devi scrivere qualcosa da cercare", Toast.LENGTH_SHORT).show();
                     }
                 }
             });

@@ -14,6 +14,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
@@ -55,6 +56,7 @@ public class ProgrammaShowActivity extends AppCompatActivity implements DialogRe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_programma_show);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         riferimentoAuth = FirebaseAuth.getInstance();
         riferimentoData = FirebaseDatabase.getInstance().getReference().child("segnalazioni");
         Intent i = getIntent();
@@ -174,7 +176,7 @@ public class ProgrammaShowActivity extends AppCompatActivity implements DialogRe
             Log.d("avviso","Fin qua ci sono");
             while(true)
             {
-                Log.d("while","eeeeee");
+                //Log.d("while","eeeeee");
                 try {
                     Esercizio es = new Esercizio();
                     es.nome = in.readLine();
@@ -193,7 +195,6 @@ public class ProgrammaShowActivity extends AppCompatActivity implements DialogRe
                 }
                 catch(Exception e)
                 {
-                    Log.d("Exception e","eccezione a cazzo");
                     e.printStackTrace();
                     break;
                 }
@@ -320,7 +321,7 @@ public class ProgrammaShowActivity extends AppCompatActivity implements DialogRe
         riferimentoData.child(nomeProg.getText().toString()+"_"+nomeAut.getText().toString()).push().setValue(s).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                Toast.makeText(ProgrammaShowActivity.this, "Segnaazione Inviata!! Grazie del tuo aiuto!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProgrammaShowActivity.this, "Segnalazione Inviata!! Grazie del tuo aiuto!", Toast.LENGTH_SHORT).show();
             }
         });
     }

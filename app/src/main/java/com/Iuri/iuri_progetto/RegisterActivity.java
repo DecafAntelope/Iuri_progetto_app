@@ -77,7 +77,7 @@ public class RegisterActivity extends AppCompatActivity {
                                                         }
                                                         else
                                                         {
-                                                            Toast.makeText(RegisterActivity.this, "ERRORE:non è stato poccibile inviare la mail di verifica!!", Toast.LENGTH_SHORT).show();
+                                                            Toast.makeText(RegisterActivity.this, "ERRORE:non è stato possibile inviare la mail di verifica!!", Toast.LENGTH_SHORT).show();
                                                         }
 
                                                         /*riferimentoData.addValueEventListener(new ValueEventListener() {

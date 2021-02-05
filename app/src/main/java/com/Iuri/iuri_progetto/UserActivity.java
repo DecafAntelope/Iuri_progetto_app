@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.se.omapi.Session;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -42,6 +43,7 @@ public class UserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         user = getIntent().getStringExtra("username");
         riferimentoAuth = FirebaseAuth.getInstance();
         riferimentoData = FirebaseDatabase.getInstance().getReference().child("utenti");
@@ -152,7 +154,27 @@ public class UserActivity extends AppCompatActivity {
                                     }
                                     else
                                     {
-                                        Toast.makeText(UserActivity.this, task.getException().getMessage().toString(), Toast.LENGTH_SHORT).show();
+                                        String errore = ((FirebaseAuthException)task.getException()).getErrorCode().toString();
+                                        switch(errore)
+                                        {
+                                            case "ERROR_WEAK_PASSWORD":Toast.makeText(UserActivity.this,"ERRORE:Password troppo debole,deve essere lunga almeno 8 caratteri",Toast.LENGTH_SHORT).show();break;
+                                            case "ERROR_OPERATION_NOT_ALLOWED":Toast.makeText(UserActivity.this, "ERRORE:Operazione non permessa", Toast.LENGTH_SHORT).show();break;
+                                            case "ERROR_INVALID_USER_TOKEN":Toast.makeText(UserActivity.this,"ERRORE:Le Credenziali dell'utente non sono più valide, deve rieffettuare il login",Toast.LENGTH_SHORT).show();break;
+                                            case "ERROR_USER_NOT_FOUND":Toast.makeText(UserActivity.this,"ERRORE:utente sconosciuto",Toast.LENGTH_SHORT).show();break;
+                                            case "ERROR_USER_TOKEN_EXPIRED":Toast.makeText(UserActivity.this,"ERRORE:Le Credenziali dell'utente non sono più valide, deve rieffettuare il login",Toast.LENGTH_SHORT).show();break;
+                                            case "ERROR_USER_DISABLED":Toast.makeText(UserActivity.this,"ERRORE:utente disabilitato",Toast.LENGTH_SHORT).show();break;
+                                            case "ERROR_CREDENTIAL_ALREADY_IN_USE":Toast.makeText(UserActivity.this,"ERRORE:Credenziali già in uso in un'altro account",Toast.LENGTH_SHORT).show();break;
+                                            case "ERROR_EMAIL_ALREADY_IN_USE":Toast.makeText(UserActivity.this,"ERRORE email già utilizzata da un altro account",Toast.LENGTH_SHORT).show();break;
+                                            case "ERROR_ACCOUNT_EXISTS_WITH_DIFFERENT_CREDENTIAL":Toast.makeText(UserActivity.this,"ERRORE l'account esiste già con altre credenziali",Toast.LENGTH_SHORT).show();break;
+                                            case "ERROR_REQUIRES_RECENT_LOGIN":Toast.makeText(UserActivity.this,"ERRORE l'operazione necessita un login recente",Toast.LENGTH_SHORT).show();break;
+                                            case "ERROR_USER_MISMATCH":Toast.makeText(UserActivity.this,"ERRORE le credenziali non corrispondono a quelle precedenti dell'utente",Toast.LENGTH_SHORT).show();break;
+                                            case "ERROR_WRONG_PASSWORD":Toast.makeText(UserActivity.this,"ERRORE Password errata",Toast.LENGTH_SHORT).show();break;
+                                            case "ERROR_INVALID_EMAIL":Toast.makeText(UserActivity.this,"ERRORE email non valida",Toast.LENGTH_SHORT).show();break;
+                                            case "ERROR_INVALID_CREDENTIAL":Toast.makeText(UserActivity.this,"ERRORE credenziali non valide",Toast.LENGTH_SHORT).show();break;
+                                            case "ERROR_CUSTOM_TOKEN_MISMATCH":Toast.makeText(UserActivity.this,"ERRORE il token non corrisponde a quello vecchio",Toast.LENGTH_SHORT).show();break;
+                                            case "ERROR_INVALID_CUSTOM_TOKEN":Toast.makeText(UserActivity.this,"ERRRORE token invalido",Toast.LENGTH_SHORT).show();break;
+                                            default :Toast.makeText(UserActivity.this,"ERRORE",Toast.LENGTH_SHORT).show();break;
+                                        }
                                     }
                                 }
                             });

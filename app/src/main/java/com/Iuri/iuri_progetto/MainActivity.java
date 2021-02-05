@@ -25,11 +25,12 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
 
     //Variabili
-    Animation alto,basso;
+    Animation alto,basso,appari;
     ImageView imm;
     TextView txt;
+    TextView nome;
 
-    static int tempo = 5000; //5 secondi
+    static int tempo = 3000; //3 secondi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,14 +42,17 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
         //Animazioni
         alto= AnimationUtils.loadAnimation(this,R.anim.top_animation);
         basso= AnimationUtils.loadAnimation(this,R.anim.bottom_animation);
+        appari = AnimationUtils.loadAnimation(this,R.anim.appari_nome);
 
         //View
         imm= findViewById(R.id.logo);
         txt = findViewById(R.id.txt);
+        nome = findViewById(R.id.nomeApp);
 
         //assegnazione animazioni alle view
         imm.setAnimation(alto);
         txt.setAnimation(basso);
+        nome.setAnimation(appari);
         new Handler().postDelayed(new Runnable()
         {
             public void run(){

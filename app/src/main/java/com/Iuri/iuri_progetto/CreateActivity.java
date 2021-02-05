@@ -56,7 +56,7 @@ public class CreateActivity extends AppCompatActivity implements DialogProgramma
     Button btnSalvaEs,btnSalvaFile;
     //ArrayAdapter adattatore;
     CustomAdapter custAdatt;
-    String nomeProgramma="";//"nonHaAncoraInseritoNullaQuindiNonSalvareIlFile9876638425òthjoirhiugf6387qhfhowgerh+tèè+ewpgwpefhif";
+    String nomeProgramma="";
     DatabaseReference riferimento;
     FirebaseAuth riferimentoAuth;
     int posizioneModifica;
@@ -93,6 +93,11 @@ public class CreateActivity extends AppCompatActivity implements DialogProgramma
                         custAdatt = new CustomAdapter(CreateActivity.this,programma);
                         lstEsercizi.setAdapter(custAdatt);
                         custAdatt.notifyDataSetChanged();
+                        esercizio.setText("");
+                        ripetizioni.setText("");
+                        serie.setText("");
+                        minuti.setText("");
+                        secondi.setText("");
                     }
 
 
@@ -108,13 +113,6 @@ public class CreateActivity extends AppCompatActivity implements DialogProgramma
                     if(!programma.isEmpty()){
                         DialogProgramma dialog = new DialogProgramma();
                         dialog.show(getSupportFragmentManager(),"dialog programma");
-
-                    /*if(!nomeProgramma.equals("nonHaAncoraInseritoNullaQuindiNonSalvareIlFile9876638425òthjoirhiugf6387qhfhowgerh+tèè+ewpgwpefhif")){
-
-
-                    }*/
-
-
                     }
                     else
                     {
@@ -214,7 +212,7 @@ public class CreateActivity extends AppCompatActivity implements DialogProgramma
                             riferimento.child(p.nomeProgramma+"_"+p.autore).setValue(p);
                         }
                     });
-                    Toast.makeText(CreateActivity.this, "Programa Creato Correttamente", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreateActivity.this, "Programma Creato Correttamente", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(CreateActivity.this,MenuActivity.class);
                     i.putExtra("mail",utente);
                     startActivity(i);

@@ -11,6 +11,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -42,6 +43,7 @@ public class CommentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         list = new ArrayList<Commento>();
         chiavi = new ArrayList<String>();
         comm = (RecyclerView) findViewById(R.id.rclCommenti);
@@ -95,10 +97,10 @@ public class CommentActivity extends AppCompatActivity {
                             chiavi.add(dataSnapshot.getKey());
                         }
                     }
-                    for(int i=0;i<list.size();i++)
+                    /*for(int i=0;i<list.size();i++)
                     {
                         Log.d("list",list.get(i).testo);
-                    }
+                    }*/
                     adattatore = new AdapterCommento(list,CommentActivity.this);
                     comm.setAdapter(adattatore);
                     adattatore.notifyDataSetChanged();

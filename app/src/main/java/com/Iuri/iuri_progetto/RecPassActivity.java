@@ -19,6 +19,8 @@ import com.google.firebase.database.ValueEventListener;
 
 public class RecPassActivity extends AppCompatActivity {
 
+
+                //ACTIVITY NON UTILIZZATA
     TextInputEditText user,dom,risp;
     Button btnRecupera;
     DatabaseReference riferimento;

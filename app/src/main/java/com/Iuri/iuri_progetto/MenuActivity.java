@@ -126,6 +126,7 @@ public class MenuActivity extends AppCompatActivity {
                 Intent i = new Intent(MenuActivity.this,HelpActivity.class);
                 i.putExtra("username",user);
                 startActivity(i);
+                finish();
             }
         });
     }

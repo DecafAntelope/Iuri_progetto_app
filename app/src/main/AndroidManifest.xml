@@ -11,8 +11,10 @@
         android:roundIcon="@mipmap/icona_app"
         android:supportsRtl="true"
         android:theme="@style/Theme.Iuri_Progetto">
-        <activity android:name=".HelpActivity"></activity>
-        <activity android:name=".UserActivity" />
+        <activity android:name=".HelpActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".UserActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ElencoProgActivityOffline"
             android:label="@string/title_activity_elenco_prog_offline"
